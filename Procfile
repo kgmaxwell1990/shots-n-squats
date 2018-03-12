@@ -1,0 +1,1 @@
+web: gunicorn shots_n_squats.wsgi:application
