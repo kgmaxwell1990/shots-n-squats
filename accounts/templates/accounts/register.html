@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load bootstrap_tags %}
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12 ">
+        <form role="form" method="post" action="{% url 'register' %}" class="align_centre margin_20">
+            <legend>Create a new account or <a href="{% url 'login' %}" class="green hover-green hvr-grow">Login</a></legend>
+            {% csrf_token %}
+            {{ form | as_bootstrap }}
+            <div class="form-group">
+                <button type="submit" class="btn btn-lg btn-success hvr-grow">Create account</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
