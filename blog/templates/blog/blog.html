@@ -4,23 +4,33 @@
 
 <h1>This is the Blog</h1>
 {% if user.is_staff %}
-<a class="btn btn-warning" href="{% url 'new_post' %}">New Post</a>
-{% endif %}
-{% for post in blog_posts %}
-<br>
-<br>
-<div class="col-md-2 col-sm-3 text-center">
-                <a class="story-img" href="#">
-                    <img src="{% gravatar_url post.author.email %}" style="width:100px; height: 100px; background-color: #12ABB2; color: #ffffff;" class="img-circle">
-                </a>
+<div class="row">
+    <div class="col-sm-12">
+        <a class="btn btn-success" href="{% url 'new_post' %}">New Post</a>
+    </div>
 </div>
-{% if post.image %}
-<img src="{{ post.image.url }}" width="150px">
+
+
 {% endif %}
-<h2>{{ post.title}}</h2>
-<p>{{ post.content}}</p>
-<p>{{post.published_date}} | <strong>Views:</strong> {{post.views}} | <strong>Tags:</strong> {{ post.tag }}</p>
-<a href="{% url 'view_post' post.id %}" class="btn btn-success">Read More</a>
-<hr>
+
+{% for post in blog_posts %}
+<a href="{% url 'view_post' post.id %}">
+<div class="col-sm-6">
+    {% if post.image %}
+    <img src="{{ post.image.url }}" width="350" height="350">
+    {% endif %}
+    
+    <h2>{{ post.title}}</h2>
+    <p>{{ post.content|truncatewords:30}}</p>
+    <p>Author: <img src="{% gravatar_url post.author.email %}" style="width:30px; height: 30px; background-color: #12ABB2; color: #ffffff;" class="img-circle">
+        {{ post.author }}
+    </p>
+    <p>{{post.published_date}} | <strong>Views:</strong> {{post.views}} | <strong>Tags:</strong> {{ post.tag }}</p>
+
+                    
+
+</div>
+</a>
 {% endfor %}
+
 {% endblock %}

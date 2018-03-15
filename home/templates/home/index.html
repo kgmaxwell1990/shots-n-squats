@@ -4,25 +4,79 @@
 
 {% block content %}
     
-<div class="container">
-<img src="{% static 'home/images/friends.jpg' %}" height="200px" width="300px">
-<img src="{% static 'home/images/friends.jpg' %}" height="200px" width="300px">
-<img src="{% static 'home/images/friends.jpg' %}" height="200px" width="300px">
+
+    <div class="row">
+        <div class="col-sm-8">
+            <h1> Welcome to shotsNsquats </h1>
+            <p> the purpose of this site bla blablah</p>
+        </div>
+        <div class="col-sm-4">
+            <p>Subscribe to our blog</p>
+            <p>Enter your email</p>
+            <form>
+                <input type="text" name="email"/>
+                <input type="submit" value="Submit"/>
+            </form>
+        </div>
+    </div>
 <hr>
-<h1> Our goals </h1>
-<!--<img src="{% static 'home/images/placeholder.png' %}"/>-->
+<img src="{% static 'home/images/friends.jpg' %}" height="200px" width="250px">
+<img src="{% static 'home/images/friends.jpg' %}" height="200px" width="250px">
+<img src="{% static 'home/images/friends.jpg' %}" height="200px" width="250px">
+<img src="{% static 'home/images/friends.jpg' %}" height="200px" width="250px">
 <hr>
-<h1> Our journey so far..</h1>
+<h2> Our goals </h2>
 <div class="row">
+    <div class="col-sm-4">
+        <img src="{% static 'home/images/placeholder.png' %}" height="200px" width="200px">
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+        sed diam nonummy nibh euismod tincidunt ut laoreet dolore
+        magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
+        quis nostrud exerci tation ullamcorper suscipit lobortis nisl
+        ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
+        dolor in hendrerit in vulputate 
+        in futurum.</p>
+    </div>
+    <div class="col-sm-4">
+        <img src="{% static 'home/images/placeholder.png' %}" height="200px" width="200px">
+        <p> Investigationes
+        demonstraverunt lectores legere me lius quod ii legunt saepius.
+        Claritas est etiam processus dynamicus, qui sequitur mutationem
+        consuetudium lectorum. Mirum est notare quam littera gothica,
+        quam nunc putamus parum claram, anteposuerit litterarum formas
+        humanitatis per seacula quarta decima et quinta decima. Eodem
+        modo typi, qui nunc nobis videntur parum clari, fiant sollemnes</p>
+    </div>
+    <div class="col-sm-4">
+        <img src="{% static 'home/images/placeholder.png' %}" height="200px" width="200px">
+        <p>velit esse molestie consequat,
+        vel illum dolore eu feugiat nulla facilisis at vero eros et
+        accumsan et iusto odio dignissim qui blandit praesent luptatum
+        zzril delenit augue duis dolore te feugait nulla facilisi.
+        Nam liber tempor cum soluta nobis eleifend option congue
+        nihil imperdiet doming id quod mazim placerat facer possim
+        assum. Typi non habent claritatem insitam; est usus legentis
+        in iis qui facit eorum claritatem.</p>
+    </div>
+</div>
+<hr>
+<h2> Our journey so far..</h2>
+<div class="row">
+    <div class="col-sm-9">
 {% for post in posts %}
-    <div class="col-sm-3">
+        <div class="col-sm-6">
         {% if post.image %}
         <img src="{{MEDIA_URL}}{{ post.image.url }}" width="200">
         {% endif %}
         <h2>{{post.title}}</h2>
         <p>{{post.content}}</p>
-    </div>
+        </div>
 {% endfor %}
+    </div>
+    <div class="col-sm-3">
+        Facebook
+        Twitter
+    </div>
 </div>
-</div>
+
 {% endblock %}
