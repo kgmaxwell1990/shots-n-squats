@@ -1,0 +1,16 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+{% if post.image %}
+<img src="{{ post.image.url }}" width="300px">
+{% endif %}
+<h1>{{post.title}}</h1>
+
+<p>{{ post.content}}</p>
+<p>{{post.published_date}} | <strong>Views:</strong> {{post.views}} | <strong>Tags:</strong> {{ post.tag }}</p>
+<a href="{% url 'blog' %}" class="btn btn-success">Go Back</a>
+{% if user.is_staff %}
+<a class="btn btn-warning" href="{% url 'edit_post' post.id %}">Edit</a>
+{% endif %}
+
+{% endblock %}
