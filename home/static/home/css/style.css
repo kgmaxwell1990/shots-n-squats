@@ -62,6 +62,7 @@ footer {
     /*box-shadow: 1px 1px 3px gray;*/
     z-index: 200;
     /*border-bottom: 1px solid gray;*/
+    padding-top: 10px;
 }
 
 .new_nav ul {
