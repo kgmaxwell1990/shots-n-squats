@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
+from django.http import HttpResponseForbidden
 from .models import Post
 from .forms import BlogPostForm
 
@@ -13,9 +14,14 @@ def view_post(request, id):
     post = get_object_or_404(Post, pk=id)
     post.views += 1
     post.save()
-    return render(request, "blog/view_post.html", {'post': post})
+    can_edit = post.can_be_edited_by(request.user)
+    return render(request, "blog/view_post.html", {'post': post, 'can_edit': can_edit})
 
 def new_post(request):
+    
+    if not request.user.is_staff:
+        return HttpResponseForbidden()
+
     if request.method == "POST":
         form = BlogPostForm(request.POST, request.FILES)
         if form.is_valid():
@@ -29,15 +35,19 @@ def new_post(request):
     return render(request, 'blog/new_post.html', {'form': form})
     
 def edit_post(request, id):
-   post = get_object_or_404(Post, pk=id)
-   if request.method == "POST":
-       form = BlogPostForm(request.POST, request.FILES, instance=post)
-       if form.is_valid():
-           post = form.save(commit=False)
-           post.author = request.user
-           post.published_date = timezone.now()
-           post.save()
-           return redirect(view_post, post.pk)
-   else:
+    post = get_object_or_404(Post, pk=id)
+   
+    if not post.can_be_edited_by(request.user):
+       return HttpResponseForbidden()
+   
+    if request.method == "POST":
+        form = BlogPostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect(view_post, post.pk)
+    else:
        form = BlogPostForm(instance=post)
-   return render(request, 'blog/edit_post.html', {'form': form})
+    return render(request, 'blog/edit_post.html', {'form': form})
