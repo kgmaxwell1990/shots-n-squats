@@ -51,3 +51,4 @@ def edit_post(request, id):
     else:
        form = BlogPostForm(instance=post)
     return render(request, 'blog/edit_post.html', {'form': form})
+    

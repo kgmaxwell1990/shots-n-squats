@@ -7,5 +7,6 @@ urlpatterns = [
     url(r'^login/', login, name="login"),
     url(r'^profile/', profile, name="profile"),
     url(r'^register/', register, name="register"),
+    url(r'^add_to_mailing_list/', add_to_mailing_list, name="add_to_mailing_list"),
     url(r'^password-reset/', include(urls_reset)),
 ]

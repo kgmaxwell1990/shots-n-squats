@@ -57,3 +57,7 @@ def register(request):
 
 
     return render(request, 'accounts/register.html', {'form': form})
+    
+    
+def add_to_mailing_list(request):
+    return redirect('home')

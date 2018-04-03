@@ -1,6 +1,7 @@
 {% extends 'home/base.html' %}
 {% load static %}
 {% load gravatar %}
+{% load bootstrap_tags %}
 
 {% block content %}
     
@@ -11,12 +12,10 @@
             <p> the purpose of this site bla blablah</p>
         </div>
         <div class="col-sm-4">
-            <p>Subscribe to our blog</p>
-            <p>Enter your email</p>
-            <form>
-                <input type="text" name="name"/>
-                <input type="text" name="email"/>
-                <input type="submit" value="Submit"/>
+            <form method="POST">
+                {% csrf_token %}
+                {{form|as_bootstrap}}
+                <input type="submit" value="Subscribe To Our Blog"/>
             </form>
         </div>
     </div>
